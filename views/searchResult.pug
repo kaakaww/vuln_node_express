@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1!= 'Search Results for: ' + searchText
+  table
+    tr
+      th Id
+      th Name
+      th Description
+    each item in rows
+      tr
+        td= item.id
+        td= item.name
+        td= item.description
+  h3
+    a(href='/search') Search

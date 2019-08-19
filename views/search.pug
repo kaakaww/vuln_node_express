@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  h1= 'Find some items'
+  form(action='/search', method='post')
+    input(type='text', name='searchText')
+    input(type='submit', name='Search')
