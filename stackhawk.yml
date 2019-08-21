@@ -1,0 +1,7 @@
+app:
+  host: ${APP_HOST:http://localhost:3000}
+  scanType: ${SCAN_TYPE:api-scan}
+  scanLevelConf: ${SCAN_LEVEL_CONF:}
+  basePath: /api
+  routes:
+    - path: GET /search?searchText=string
