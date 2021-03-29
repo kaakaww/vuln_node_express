@@ -30,5 +30,3 @@ db.serialize(function () {
     }
   });
 });
-
-

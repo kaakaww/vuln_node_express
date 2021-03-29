@@ -1,13 +1,17 @@
-# Node Express Vulny
+# Vulnerable Node Express
 
-Hi I'm Vulny a modern web stack using the latest in Node/Express framework technology.
-I'm both sophisticated and naive all while using a best in class in web framework.
+This is a vulnerable Node Express service meant to be used as a target for security testing tools.
 
-You should probably scan me with a web app vulnerability scanner.
+## Build and Run
 
-### NPM
+### Install NPM Dependencies
 ```shell script
 npm install
+```
+
+### Initialize SQLite DB
+```shell
+node bootstrapdb.js
 ```
 
 ### Run
@@ -15,16 +19,23 @@ npm install
 DEBUG=myapp:* npm start
 ```
 
-### Build
+## Build and Run with Docker
+
+### Build Docker Image
 ```shell script
-docker build -t stackhawk/nodeexpressvulny .
+docker build --tag stackhawk/nodeexpressvulny .
 ```
 
-### Run docker
+### Run Docker Container
 ```shell script
-docker run --rm -p 9000:9000 --name nodeexpressvulny stackhawk/nodeexpressvulny
+docker run --rm --publish 3000:3000 --name nodeexpressvulny stackhawk/nodeexpressvulny
 ```
 
-### Do bad stuff
+### Build and Run in Docker Compose
+```shell script
+docker-compose up --build --detach
+```
+
+## Known Vulnerabilities
 * SQL Injection via search box. - `a%'; insert into items values (default, 'hacker item name','bad bad description'); select * from ITEMS where name like  '%banan`
-* Cross Site Scripting via search box. - `<script>alert('hey guy');</script>`
+* Cross Site Scripting via search box. - `<script>alert("hey guy");</script>`
