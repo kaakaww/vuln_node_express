@@ -1,9 +1,8 @@
-FROM node:12.8-stretch
+FROM node:15.12.0-buster
 
 WORKDIR /app
 COPY . .
-RUN npm install --production
+RUN npm install
 ENV DEBUG=myapp:*
 EXPOSE 3000
-CMD ["node", "/app/bin/www"]
-#CMD ["npm", "run", "start"]
+CMD ["npm", "run", "start"]
