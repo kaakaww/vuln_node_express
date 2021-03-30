@@ -6,17 +6,45 @@ db.serialize(function () {
     if (err) {
       console.error(err);
     } else {
-      const stmt = db.prepare('INSERT INTO item VALUES (null, ?, ?)', function (err) {
+      const itemTbl = db.prepare('INSERT INTO item VALUES (null, ?, ?)', function (err) {
         if (err) {
           console.error(err)
         }
       });
 
       for (var i = 0; i < 3; i++) {
-        stmt.run('item-' + i, 'item-' + i + ' is the great item evar');
+        itemTbl.run('item-' + i, 'item-' + i + ' is the great item evar');
       }
 
-      stmt.finalize(function (err) {
+      itemTbl.finalize(function (err) {
+        if (err) {
+          console.error(err)
+        } else {
+          db.close(function (err) {
+            if (err) {
+              console.error(err)
+            }
+          });
+        }
+      });
+    }
+  });
+
+
+  db.run('CREATE TABLE user (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, username NVARCHAR(1024) NOT NULL, password TEXT NOT NULL)', function (err) {
+    if (err) {
+      console.error(err);
+    } else {
+      const userTbl = db.prepare('INSERT INTO user VALUES (null, ?, ?)', function (err) {
+        if (err) {
+          console.error(err)
+        }
+      });
+      userTbl.run('admin', 'S3cr37P@$$w0rD!');
+      userTbl.run('user1', 'bad_password');
+      userTbl.run('user2', 'worse');
+      userTbl.run('user3', 'fail');
+      userTbl.finalize(function (err) {
         if (err) {
           console.error(err)
         } else {
