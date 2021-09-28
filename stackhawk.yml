@@ -2,3 +2,4 @@ app:
   applicationId: ${APP_ID:af7126a4-7491-4416-994d-bcb89a1d405f}
   env: Development
   host: http://localhost:3000
+  
