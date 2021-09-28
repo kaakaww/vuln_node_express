@@ -1,0 +1,26 @@
+name: HawkScan
+on:
+  # push:
+  pull_request:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+jobs:
+  hawkscan:
+    name: HawkScan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@v2
+      - name: Docker Build
+        run: docker-compose build
+      - name: Run App
+        run: docker-compose up -d
+      - name: Run HawkScan
+        env:
+          API_KEY: ${{secrets.HAWK_API_KEY}}
+        run: >
+          docker run -v $(pwd):/hawk -t --network vuln_node_express
+          -e API_KEY="${API_KEY}"
+          stackhawk/hawkscan stackhawk.yml stackhawk-github.yml
