@@ -10,11 +10,17 @@ jobs:
     name: Build and test
     runs-on: ubuntu-20.04
     steps:
-      - name: Checkout code
+      - name: Check Out Code
         uses: actions/checkout@v2
       - name: Install Node.js 14.x
         uses: actions/setup-node@v2
         with:
           node-version: 14.x
-      - name: Install dependencies
+      - name: Install Dependencies
         run: npm clean-install
+      - name: Daemonize our Node API service
+        run: nohup npm run start &
+      - name: Run HawkScan
+        uses: stackhawk/hawkscan-action@v1.3.1
+        with:
+          apiKey: ${{ secrets.HAWK_API_KEY }}
