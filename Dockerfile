@@ -1,4 +1,4 @@
-FROM node:14.16.1-buster
+FROM node:14.19-buster
 
 WORKDIR /app
 COPY . .
