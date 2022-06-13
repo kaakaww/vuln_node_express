@@ -7,8 +7,14 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var searchRouter = require('./routes/search');
 var apiRouter = require('./routes/api');
+const robots = require('express-robots-txt')
 
 var app = express();
+
+app.use(robots({
+    UserAgent: '*',
+    Disallow: [ '/', '/search' ]
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
