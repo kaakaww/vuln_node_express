@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Clone repo
-        uses: actions/checkout@develop
+        uses: actions/checkout@master
 
       - name: tfsec
         uses: tfsec/tfsec-sarif-action@v0.1.3
