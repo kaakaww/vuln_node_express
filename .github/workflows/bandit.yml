@@ -1,0 +1,25 @@
+name: bandit
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+  jobs:
+    bandit:
+      name: tfsec
+      runs-on: [ atc-ubuntu-20.04 ]
+    steps:
+      - name: Checking out blueprint on the branch that you pushed on
+        uses: actions/checkout@v2
+        with:
+          repository: cdec/cdec-toolset-blueprints
+          path: cdec-toolset-blueprints
+          
+      - name: Installing pip
+        run: sudo apt -y install python3-pip
+        
+      - name: Installing bandit
+        run: sudo pip install bandit
+        
+      - name: Running bandit
+        run: bandit -r .
