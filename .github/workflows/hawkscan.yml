@@ -1,5 +1,5 @@
 # .github/workflows/build-and-test.yml
-name: Build and Test
+name: HawkScan
 on:
   push: 
     branches:
@@ -7,7 +7,7 @@ on:
   pull_request:
 jobs:
   build-and-test:
-    name: Build and test
+    name: Build and Scan
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout code
