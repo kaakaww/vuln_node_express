@@ -2,3 +2,7 @@ app:
   applicationId: edad7541-be6c-4022-99e8-c2274b0489b6 # (required)
   env: Development # (required)
   host: http://localhost:3000 # (required)
+
+hawk:
+  failureThreshold: high
+  
