@@ -8,9 +8,9 @@ app:
   host: http://localhost:3000 # (required)
 tags:
   - name: _STACKHAWK_GIT_COMMIT_SHA
-    value: ${GITHUB_SHA:}
+    value: ${COMMIT_SHA:}
   - name: _STACKHAWK_GIT_BRANCH
-    value: ${GITHUB_REF_NAME:}
+    value: ${BRANCH_NAME:}
 
 # -- Customized Configuration for GraphQL/SOAP/OpenAPI, add here --
   # Configuration Docs: https://docs.stackhawk.com/hawkscan/configuration/
