@@ -1,0 +1,34 @@
+name: Build, Test, Scan
+on:
+  push: 
+    branches:
+      - main
+jobs:
+  build-and-test:
+    name: Build and test
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Node.js 14.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
+          cache: npm
+      - name: Install dependencies
+        run: npm install
+      # Comment out the tests for speed.
+      #- name: Run unit tests
+      #  run: npm test
+      - name: Daemonize our Node API service
+        run: npm run start &
+      - name: Install Hawk CLI
+        uses: stackhawk/hawkscan-action@v2.0.0
+        with:
+          installCLIOnly: true
+      - name: Run CLI Scan
+        env:
+          APP_ID: ${{ secrets.HAWK_APP_ID }}
+          COMMIT_SHA: ${{ env.GITHUB_SHA }}
+          BRANCH_NAME: ${{ env.GITHUB_REF_NAME }}
+        run: hawk ${{ secrets.HAWK_TEST_OPTIONS }} --api-key=${{ secrets.HAWK_API_KEY }} scan
