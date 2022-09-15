@@ -2,6 +2,8 @@
 
 This is a vulnerable Node Express service meant to be used as a target for security testing tools.
 
+![GitHub branch checks state](https://img.shields.io/github/checks-status/bwvolleyball-org/vuln_node_express/main?style=for-the-badge)
+
 ## Build and Run
 
 ### Install NPM Dependencies
