@@ -1,0 +1,25 @@
+name: Fast Scan
+on:
+  pull_request:
+jobs:
+  build-and-test:
+    name: Fast Scan
+    runs-on: ubuntu-20.04
+    services:
+      vulny-node-express:
+        image: bwvolleyball/demo_vuln_node
+        ports:
+          - 3000:3000
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Hawk CLI
+        uses: stackhawk/hawkscan-action@v2.0.0
+        with:
+          installCLIOnly: true
+      - name: Run CLI Scan
+        env:
+          APP_ID: ${{ secrets.HAWK_APP_ID_PROD }}
+          COMMIT_SHA: ${{ github.event.pull_request.head.sha }}
+          BRANCH_NAME: ${{ env.GITHUB_HEAD_REF }}
+        run: hawk --api-key=${{ secrets.HAWK_API_KEY_PROD }} scan

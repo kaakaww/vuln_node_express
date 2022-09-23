@@ -6,7 +6,7 @@ app:
   env: Development # (required)
   # -- The url of your application to scan --
   # -- Run the app local to the build for faster results --
-  host: http://localhost:3001 # (required)
+  host: http://localhost:3000 # (required)
 tags:
   - name: _STACKHAWK_GIT_COMMIT_SHA
     value: ${COMMIT_SHA:}
