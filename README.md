@@ -42,7 +42,7 @@ docker-compose up --build --detach
 * SQL Injection via search box. - `item%' union all select * from user; -- ` 
 * Cross Site Scripting via search box. - `<script>alert("hey guy");</script>`
 
----
-Come learn how to security.
-Max Kaakaww!
----
+
+> Come learn how to security.
+> Max Kaakaww!
+
