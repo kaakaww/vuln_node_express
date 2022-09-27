@@ -23,5 +23,5 @@ jobs:
         env:
           APP_ID: ${{ secrets.HAWK_APP_ID_PROD }}
           COMMIT_SHA: ${{ github.sha }}
-          BRANCH_NAME: ${{ env.GITHUB_REF }}
+          BRANCH_NAME: ${{ github.ref }}
         run: hawk --api-key=${{ secrets.HAWK_API_KEY_PROD }} scan
