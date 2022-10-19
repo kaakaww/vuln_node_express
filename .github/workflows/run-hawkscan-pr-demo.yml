@@ -22,4 +22,4 @@ jobs:
           APP_ID: ${{ secrets.HAWK_APP_ID_PROD }}
           COMMIT_SHA: ${{ github.event.pull_request.head.sha }}
           BRANCH_NAME: ${{ github.head_ref }}
-        run: hawk --api-key=${{ secrets.HAWK_API_KEY_PROD }} scan
+        run: hawk --api-key=${{ secrets.HAWK_API_KEY_PROD }} ${{ secrets.HAWK_TEST_OPTIONS }} scan
