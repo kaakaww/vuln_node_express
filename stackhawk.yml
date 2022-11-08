@@ -1,5 +1,4 @@
 app:
-  # applicationId: edad7541-be6c-4022-99e8-c2274b0489b6 # (required)
   applicationId: 77501689-6975-43be-a9a4-ad88ded86f03 # (required)
   env: Development # (required)
   host: http://localhost:3000 # (required)
