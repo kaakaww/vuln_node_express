@@ -2,13 +2,12 @@ app:
   applicationId: 77501689-6975-43be-a9a4-ad88ded86f03 # (required)
   env: Development # (required)
   host: http://localhost:3000 # (required)
-tags:
-  - name: _STACKHAWK_GIT_COMMIT_SHA
-    value: ${GITHUB_SHA}
-  - name: _STACKHAWK_GIT_BRANCH
-    value: ${GITHUB_HEAD_REF}
 
 hawk:
   failureThreshold: high
 
-# Comment
+tags:
+  - name: _STACKHAWK_GIT_COMMIT_SHA
+    value: ${COMMIT_SHA:}
+  - name: _STACKHAWK_GIT_BRANCH
+    value: ${BRANCH_NAME:}
