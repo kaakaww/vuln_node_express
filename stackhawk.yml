@@ -10,4 +10,5 @@ tags:
   - name: _STACKHAWK_GIT_COMMIT_SHA
     value: ${COMMIT_SHA:}
   - name: _STACKHAWK_GIT_BRANCH
-    value: ${BRANCH_NAME:}
+    # value: ${BRANCH_NAME:}
+    value: ${GITHUB_HEAD_REF:}
