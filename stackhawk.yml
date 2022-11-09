@@ -6,7 +6,7 @@ tags:
   - name: _STACKHAWK_GIT_COMMIT_SHA
     value: ${GITHUB_SHA}
   - name: _STACKHAWK_GIT_BRANCH
-    value: ${GITHUB_REF}
+    value: ${GITHUB_HEAD_REF}
 
 hawk:
   failureThreshold: high
