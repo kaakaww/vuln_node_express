@@ -32,7 +32,7 @@ jobs:
             echo 'export HAWK_VERSION=$(curl -o- https://api.stackhawk.com/hawkscan/version)' >> "$BASH_ENV"
             echo 'export PATH="${HAWK_VERSION}/hawk:${PATH}"' >> "$BASH_ENV"
       - run: curl -v https://download.stackhawk.com/hawk/cli/hawk-"${HAWK_VERSION}".zip -o hawk.zip
-      - run: unzip hawk.zip hawk-"${HAWK_VERSION}"
+      - run: unzip hawk.zip
       - node/install-packages:
           # If you are using yarn, change the line below from "npm" to "yarn"
           pkg-manager: npm
