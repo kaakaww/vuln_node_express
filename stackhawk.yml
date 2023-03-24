@@ -1,0 +1,8 @@
+app:
+  applicationId: 0399c858-48d5-4ee8-89a7-79f1e84f2671
+  env: Development
+  host: http://localhost:3000
+  waitForAppTarget:
+    path: /
+    pollDelay: 1000
+    waitTimeoutMillis: 300000
