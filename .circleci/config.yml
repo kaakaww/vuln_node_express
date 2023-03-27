@@ -15,7 +15,7 @@ jobs:
       - run: unzip hawk.zip
       - run: npm install
       - run: nohup npm run start &
-      - run: hawk --api-key="${HAWK_API_KEY}" --debug scan stackhawk.yml
+      - run: hawk --api-key="${HAWK_API_KEY}" scan --debug stackhawk.yml
 
 workflows:
   sample:
