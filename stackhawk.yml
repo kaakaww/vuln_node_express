@@ -1,5 +1,6 @@
 app:
-  applicationId: 158ff8da-ea7f-42c4-9e7e-bc979bd8f2d6
+  #applicationId: 158ff8da-ea7f-42c4-9e7e-bc979bd8f2d6 #Azure Pipelines app
+  applicationId: 0399c858-48d5-4ee8-89a7-79f1e84f2671 #CircleCI app
   env: Development
   host: http://localhost:3000
   waitForAppTarget:
