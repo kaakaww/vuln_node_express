@@ -25,7 +25,7 @@ pool:
   #vmImage: ubuntu-latest
 steps:
   - bash: |
-      cd /home/dan/projects/vuln_node_express
+      cd /Users/dan/projects/vuln_node_express
       docker run --rm --publish 3000:3000 --detach --name nodeexpressvulny stackhawk/nodeexpressvulny
   - task: HawkScanInstall@1
     inputs:
