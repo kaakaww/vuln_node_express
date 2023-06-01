@@ -25,6 +25,9 @@ pool:
   name: self-hosted
   #vmImage: ubuntu-latest
 steps:
+  - powershell: |
+      cd C:\Users\Dan\projects\vuln_node_express
+      docker run --rm --publish 3000:3000 --detach --name nodeexpressvulny stackhawk/nodeexpressvulny
   - task: HawkScanInstall@1
     inputs:
       version: latest
