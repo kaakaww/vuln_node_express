@@ -1,12 +1,15 @@
 app:
-  #applicationId: 158ff8da-ea7f-42c4-9e7e-bc979bd8f2d6 #Azure Pipelines app
-  applicationId: 0399c858-48d5-4ee8-89a7-79f1e84f2671 #CircleCI app
+  applicationId: ${APP_ID:dacc7d3e-babc-47d2-b040-ab117ab04526}
   env: Development
   host: http://localhost:3000
+  #see below for scanner retry behavior(optional); this allows the application to fully deploy before the scan starts
+  #see https://docs.stackhawk.com/hawkscan/configuration/#appwaitforapptarget
   waitForAppTarget:
     path: /
     pollDelay: 1000
     waitTimeoutMillis: 300000
+#Tag scans with branch and commit info(optional)
+#CircleCI example below; see https://docs.stackhawk.com/workflow-integrations/github-app/github-pr-checks.html for others
 tags:
   - name: _STACKHAWK_GIT_COMMIT_SHA
     value: ${CIRCLE_SHA1}
