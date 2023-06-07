@@ -1,32 +1,18 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# # https://aka.ms/yaml
-
-# trigger:
-# - main
-
-# pool:
-#   vmImage: ubuntu-latest
-
-# steps:
-# - script: echo Hello, world!
-#   displayName: 'Run a one-line script'
-
-# - script: |
-#     echo Add other tasks to build, test, and deploy your project.
-#     echo See https://aka.ms/yaml
-#   displayName: 'Run a multi-line script'
-
-
+# Example YAML pipeline for running vuln_node_express within Azure Pipelines
+# This example uses a self-hosted agent, locally installed on a Windows system that also has Docker Desktop installed
+# Usage: 
+# -create self-hosted agent pool in Project Settings
+# -download/install/configure a Windows agent which is part of that pool
+# -clone the vuln_node_express repo locally
+# -substitute your user name for [User] below
+# adjust $Env:PATH section as needed to populate the docker executable into the path
 trigger:
   - main
 pool:
   name: self-hosted
-  #vmImage: ubuntu-latest
 steps:
   - powershell: |
-      cd C:\Users\Dan\projects\vuln_node_express
+      cd C:\Users\[User]\projects\vuln_node_express
       $Env:PATH = "C:\Program Files\Docker\Docker\resources\bin;$Env:PATH"
       docker run --rm --publish 3000:3000 --detach --name nodeexpressvulny stackhawk/nodeexpressvulny
   - task: HawkScanInstall@1
