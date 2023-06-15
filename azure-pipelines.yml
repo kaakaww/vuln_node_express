@@ -1,0 +1,26 @@
+# Example YAML pipeline for running vuln_node_express within Azure Pipelines
+# This example uses a self-hosted agent, locally installed on a Windows system that also has Docker Desktop installed
+# Usage: 
+# -create self-hosted agent pool in Project Settings
+# -download/install/configure a Windows agent which is part of that pool
+# -clone the vuln_node_express repo locally
+# -substitute your user name for [User] below
+# adjust $Env:PATH section as needed to populate the docker executable into the path
+trigger:
+  - main
+pool:
+  name: self-hosted
+steps:
+  - powershell: |
+      cd C:\Users\[User]\projects\vuln_node_express
+      $Env:PATH = "C:\Program Files\Docker\Docker\resources\bin;$Env:PATH"
+      docker run --rm --publish 3000:3000 --detach --name nodeexpressvulny stackhawk/nodeexpressvulny
+  - task: HawkScanInstall@1
+    inputs:
+      version: latest
+  - task: RunHawkScan@1
+    inputs:
+      configFile: "stackhawk.yml"
+      version: "latest"
+    env:
+      HAWK_API_KEY: $(hawk_api_key)

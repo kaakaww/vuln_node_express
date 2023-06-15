@@ -1,0 +1,24 @@
+#Example configuration below for a machine executor workflow within CircleCI; see https://docs.stackhawk.com/continuous-integration/circleci.html
+version: 2.1
+orbs:
+  node: circleci/node@4.7
+jobs:
+  build-and-test:
+    machine: # executor type
+      image: ubuntu-2004:202010-01 
+    steps:
+      - checkout
+      - run:
+          command: |
+            echo 'export HAWK_VERSION=$(curl -o- https://api.stackhawk.com/hawkscan/version)' >> "$BASH_ENV"
+            echo 'export PATH="hawk-${HAWK_VERSION}:${PATH}"' >> "$BASH_ENV"
+      - run: curl -v https://download.stackhawk.com/hawk/cli/hawk-"${HAWK_VERSION}".zip -o hawk.zip
+      - run: unzip hawk.zip
+      - run: npm install
+      - run: nohup npm run start &
+      - run: hawk --api-key="${HAWK_API_KEY}" scan --env CIRCLE_SHA1="$CIRCLE_SHA1" --env CIRCLE_BRANCH="$CIRCLE_BRANCH" --debug stackhawk.yml
+
+workflows:
+  sample:
+    jobs:
+      - build-and-test

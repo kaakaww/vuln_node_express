@@ -1,0 +1,17 @@
+app:
+  applicationId: ${APP_ID}
+  env: Development
+  host: http://localhost:3000
+  #see below for scanner retry behavior(optional); this allows the application to fully deploy before the scan starts
+  #see https://docs.stackhawk.com/hawkscan/configuration/#appwaitforapptarget
+  waitForAppTarget:
+    path: /
+    pollDelay: 1000
+    waitTimeoutMillis: 300000
+#Tag scans with branch and commit info(optional)
+#CircleCI example below; see https://docs.stackhawk.com/workflow-integrations/github-app/github-pr-checks.html for others
+tags:
+  - name: _STACKHAWK_GIT_COMMIT_SHA
+    value: ${CIRCLE_SHA1}
+  - name: _STACKHAWK_GIT_BRANCH
+    value: ${CIRCLE_BRANCH}
