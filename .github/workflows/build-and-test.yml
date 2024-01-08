@@ -18,7 +18,7 @@ jobs:
            node-version: 14
  #          cache: npm #
       - name: Install dependencies
-        run: npm install
+        run: npm install npx
       - name: Run unit tests
         run: npm test
 
