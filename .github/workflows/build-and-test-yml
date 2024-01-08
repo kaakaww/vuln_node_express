@@ -1,0 +1,23 @@
+# .github/workflows/build-and-test.yml
+name: Build and Test
+on:
+  push: 
+    branches:
+      - main
+  pull_request:
+jobs:
+  build-and-test:
+    name: Build and test
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Node.js 14.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
+          cache: npm
+      - name: Install dependencies
+        run: npm install
+      - name: Run unit tests
+        run: npm test
