@@ -6,6 +6,10 @@ app:
   env: Development # (required)
   # -- The url of your application to scan --
   host: http://localhost:3000 # (required)
+  
+# -- To make the HawkScan break your build for high severity alerts -- 
+#  hawk:
+#    failureThreshold: High
 
 
 # -- Customized Configuration for GraphQL/SOAP/OpenAPI, add here --
@@ -18,3 +22,6 @@ app:
 # -- Help Section --
   # Docs: https://docs.stackhawk.com/
   # Contact Support: support@stackhawk.com
+
+
+#This is a test
