@@ -1,5 +1,5 @@
 app:
-  applicationId: ${APP_ID}
+  applicationId: ${HAWK_APP_ID}
   env: Development
   host: http://localhost:3000
   #see below for scanner retry behavior(optional); this allows the application to fully deploy before the scan starts
