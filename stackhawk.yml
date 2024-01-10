@@ -8,8 +8,8 @@ app:
   host: http://localhost:3000 # (required)
   
 # -- To make the HawkScan break your build for high severity alerts -- 
-#  hawk:
-#    failureThreshold: High
+#hawk:
+#  failureThreshold: High
 
 
 # -- Customized Configuration for GraphQL/SOAP/OpenAPI, add here --
