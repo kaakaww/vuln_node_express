@@ -28,7 +28,7 @@ DEBUG=myapp:* npm start
 ```shell script
 docker build --tag stackhawk/nodeexpressvulny .
 ```
-
+##
 ### Run Docker Container
 ```shell script
 docker run --rm --publish 3000:3000 --name nodeexpressvulny stackhawk/nodeexpressvulny
