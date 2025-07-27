@@ -1,0 +1,33 @@
+name: Full OWASP Security Scan
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: OWASP Full Vulnerability Scan
+        uses: dependency-check/Dependency-Check_Action@main
+        with:
+          project: 'My-App-Security-Report'
+          format: 'HTML JSON'  # Generates both formats
+          fail_on_cvss: 0      # Shows ALL vulnerabilities (0 = don't fail)
+          additional_args: '--disableYarnAudit --disableNodeAudit'  # Focus on OWASP data
+
+      - name: Upload HTML Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: security-report-html
+          path: dependency-check-report.html
+
+      - name: Upload JSON Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: security-report-json
+          path: dependency-check-report.json

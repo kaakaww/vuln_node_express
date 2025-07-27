@@ -1,0 +1,30 @@
+name: Security Scan with OWASP
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      # Run OWASP Dependency-Check
+      - name: OWASP Dependency-Check Scan
+        uses: dependency-check/Dependency-Check_Action@main
+        with:
+          project: 'Your-Project-Name'
+          format: 'HTML'  # Also supports XML, JSON, CSV
+          fail_on_cvss: 7  # Fails if vulnerabilities >= 7.0 CVSS score found
+          scan_dir: '.'   # Scans your entire repo
+
+      # Upload report as artifact (optional)
+      - name: Upload Report
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: dependency-check-report
+          path: dependency-check-report.html

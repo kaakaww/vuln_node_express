@@ -1,0 +1,60 @@
+name: OWASP Security Scan with PDF Report
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Install wkhtmltopdf for PDF conversion
+      - name: Install PDF tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wkhtmltopdf
+
+      # Run OWASP Scan with multiple report formats
+      - name: OWASP Dependency Check
+        uses: dependency-check/Dependency-Check_Action@main
+        with:
+          project: 'Security-Report'
+          path: '.'
+          format: 'HTML JSON'  # Generate both formats
+          out: './reports'
+          args: '--disableBundleAudit'
+
+      # Convert HTML report to PDF
+      - name: Generate PDF Report
+        run: |
+          wkhtmltopdf --enable-local-file-access \
+          reports/dependency-check-report.html \
+          reports/security-report.pdf
+
+      # Package all reports
+      - name: Package Reports
+        run: |
+          zip -r reports.zip reports/
+
+      # Upload all formats (PDF, HTML, JSON)
+      - name: Upload Security Reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-reports
+          path: |
+            reports.zip
+            reports/security-report.pdf
+            reports/dependency-check-report.*
+          retention-days: 7
+
+      # Download link preview
+      - name: Show Download Info
+        run: |
+          echo "📥 Download these files from GitHub Actions artifacts:"
+          echo "- security-report.pdf (PDF version)"
+          echo "- dependency-check-report.html (Interactive HTML)"
+          echo "- dependency-check-report.json (Machine-readable)"

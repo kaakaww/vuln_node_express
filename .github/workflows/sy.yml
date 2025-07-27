@@ -1,0 +1,40 @@
+name: Full OWASP Security Scan
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: OWASP Full Vulnerability Scan
+        uses: dependency-check/Dependency-Check_Action@main
+        with:
+          project: 'My-App-Security-Report'
+          format: 'HTML JSON CSV'  # Multiple report formats
+          fail_on_cvss: 0          # Show ALL vulnerabilities (0 = display but don't fail)
+          scan_dir: '.'            # Scan entire repository
+          additional_args: |
+            --log ./dc.log
+            --disableBundleAudit
+            --disableNodeAudit
+
+      - name: Upload Security Reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-reports
+          path: |
+            dependency-check-report.*
+            dc.log
+          retention-days: 7  # Automatically delete after 1 week
+
+      - name: Show Vulnerability Count (Preview)
+        run: |
+          echo "Vulnerability Summary:"
+          jq '.dependencies[] | select(.vulnerabilities != null) | .vulnerabilities[] | .name' dependency-check-report.json | sort | uniq -c | sort -nr
+        if: always()
